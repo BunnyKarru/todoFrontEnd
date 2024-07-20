@@ -5,17 +5,13 @@ import { popUpContext } from '../Context/PopUpContext';
 
 function HomePage() {
   const { companyPopUp, setCompanyPopUp } = useContext(popUpContext);
-
-  const logging = (data) => {
-    console.log(data);
-  };
-
+ 
   return (
     <div className='flex flex-col'> {/* Adjusted to flex-col for vertical alignment */}
       <NavBar />
       <div>
       {companyPopUp && (
-        <CreateCompany onClose={() => setCompanyPopUp(false)} onAddCompany={logging} />
+        <CreateCompany  />
       )}
 
       </div>
