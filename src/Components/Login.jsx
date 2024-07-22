@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import {authContext} from '../Context/authContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { setAuth } = useContext(authContext);
+  const navigate = useNavigate();
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -18,6 +22,8 @@ const LoginPage = () => {
         password
       });
       console.log(response.data);
+      setAuth(true);
+      navigate("/");
       // Handle successful login here (e.g., redirect, save token, etc.)
     } catch (err) {
       if (err.response) {

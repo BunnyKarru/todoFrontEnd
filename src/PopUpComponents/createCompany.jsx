@@ -18,7 +18,7 @@ const CreateCompany = () => {
     try {
       const response = await axios.post("http://localhost:8000/company/createCompany", {
         companyName
-      });
+      }, { withCredentials: true });
       setSuccess(true);
       setCompanyName('');
       setTimeout(() => setCompanyPopUp(false), 2000); // Close modal after 2 seconds
