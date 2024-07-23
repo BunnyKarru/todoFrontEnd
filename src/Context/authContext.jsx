@@ -8,7 +8,7 @@ const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
-      const result = await axios.get("http://localhost:8000/v1/users/check", {}, { withCredentials: true });
+      const result = await axios.get("http://localhost:8000/v1/users/check", { withCredentials: true });
 
       console.log(result);
       if (result.status === 401) {

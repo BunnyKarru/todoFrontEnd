@@ -8,11 +8,11 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useContext(authContext);
+  // const { setAuth } = useContext(authContext);
   const navigate = useNavigate();
 
   const sendData = async (e) => {
-    e.preventDefault();
+   e.preventDefault()
     setLoading(true);
     setError(null);
 
@@ -20,10 +20,10 @@ const LoginPage = () => {
       const response = await axios.post("http://localhost:8000/v1/users/login", {
         email,
         password
-      });
+      },{withCredentials:true});
       console.log(response.data);
-      setAuth(true);
-      navigate("/");
+      // setAuth(true);
+      // navigate("/");
       // Handle successful login here (e.g., redirect, save token, etc.)
     } catch (err) {
       if (err.response) {

@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import {authContext} from '../Context/authContext';
 function HomePage() {
   const { companyPopUp, setCompanyPopUp } = useContext(popUpContext);
-  const { auth } = useContext(authContext);
-  const navigate = useNavigate();
+  // const { auth } = useContext(authContext);
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!auth) {
-      navigate('/login');
-    }
-  }, [auth, navigate]);
+  // useEffect(() => {
+  //   if (!auth) {
+  //     navigate('/login');
+  //   }
+  // }, [auth, navigate]);
  
   return (
     <div className='flex flex-col'> {/* Adjusted to flex-col for vertical alignment */}
