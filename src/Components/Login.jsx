@@ -1,41 +1,28 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import {authContext} from '../Context/authContext';
+import { login } from '../Authentication/authentication';
+import { authContext } from '../Context/authContext';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const { setAuth } = useContext(authContext);
   const navigate = useNavigate();
+  const {setUser} = useContext(authContext)
 
   const sendData = async (e) => {
-   e.preventDefault()
+    e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/v1/users/login", {
-        email,
-        password
-      },{withCredentials:true});
-      console.log(response.data);
-      // setAuth(true);
-      // navigate("/");
-      // Handle successful login here (e.g., redirect, save token, etc.)
-    } catch (err) {
-      if (err.response) {
-        // Server responded with a status other than 2xx
-        setError(err.response.data.message || "An error occurred");
-      } else if (err.request) {
-        // Request was made but no response was received
-        setError("No response from server. Please try again later.");
-      } else {
-        // Something else caused the error
-        setError("An error occurred. Please try again.");
-      }
+      const response = await login({ email, password });
+      setUser(response);
+      navigate("/");
+    } catch (error) {
+      setError(error.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }
